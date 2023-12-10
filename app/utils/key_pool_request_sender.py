@@ -150,6 +150,9 @@ class SessionManager:
             if session is not None:
                 # 将可用的会话移到可用列表
                 logger.debug(f'找到可用的session，#{managed_session.id}')
+                logger.debug(f'waiting_sessions:#{len(self.waiting_sessions)}')
+                logger.debug(
+                    f'used_sessions:#{self.used_sessions.count_items()}')
                 logger.debug(f'session的config为{managed_session.config}')
                 logger.debug(f'session的请求头为{session.headers}')
                 self.waiting_sessions.remove(managed_session)
@@ -203,7 +206,7 @@ class APIRequest:
     result: list = field(default_factory=list)
     id: uuid.UUID = field(default_factory=uuid.uuid4)
     attempts_left: int = 20
-    delay: int = 3
+    delay: int = 10
 
     async def call_llm_single(
         self,
@@ -222,6 +225,9 @@ class APIRequest:
                     json=self.request_json,
             ) as response:
                 response = await response.json()
+            if response is None:
+                logging.warning(f"Request {self.id} 返回了None")
+                raise Exception("响应为空")
             if "error" in response:
 
                 error = response
