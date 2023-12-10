@@ -304,10 +304,8 @@ class MessageProcessor:
 
 
 # 配置session_configs
-api_keys = [
-    "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",
-    "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"
-]
+with open('api keys.txt', 'r') as file:
+    api_keys = file.read().splitlines()
 session_configs = [{
     "headers": {
         "Authorization": f"Bearer {api_key}",
