@@ -202,7 +202,7 @@ class APIRequest:
     status_tracker: StatusTracker
     result: list = field(default_factory=list)
     id: uuid.UUID = field(default_factory=uuid.uuid4)
-    attempts_left: int = 5
+    attempts_left: int = 20
     delay: int = 3
 
     async def call_llm_single(
@@ -298,6 +298,7 @@ class MessageProcessor:
                                     session_manager=self.manager,
                                     status_tracker=self.status_tracker)
         response = await request_client.call_llm()
+        logger.info(f'统计：{self.status_tracker}')
         del request_client
         logger.info('request_client已删除')
         return response

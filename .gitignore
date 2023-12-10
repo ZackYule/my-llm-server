@@ -2,4 +2,4 @@
 env
 __pycache__
 api keys.txt
-myapp.log
+myapp*.log
