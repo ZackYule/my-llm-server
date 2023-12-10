@@ -19,23 +19,6 @@ async def chat_completions(request: ChatRequest,
     # 读取请求主体
     request_body = request.model_dump()
 
-    logger.debug(type(request))
-    logger.debug(dir(request))
-    content = "Translate the following English text to French: 'Hello, how are you?'"
-    data = {
-        "model":
-        "gpt-3.5-turbo-1106",
-        "messages": [{
-            "role": "system",
-            "content": "You are a helpful assistant."
-        }, {
-            "role": "user",
-            "content": content
-        }],
-        "max_tokens":
-        200
-    }
-
     # 调用异步的 send_request 函数
     response = await processor_instance.send_request(request_body)
 
