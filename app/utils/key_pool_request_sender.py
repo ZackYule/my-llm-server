@@ -205,8 +205,8 @@ class APIRequest:
     status_tracker: StatusTracker
     result: list = field(default_factory=list)
     id: uuid.UUID = field(default_factory=uuid.uuid4)
-    attempts_left: int = 20
-    delay: int = 10
+    attempts_left: int = 5
+    delay: int = 1
 
     async def call_llm_single(
         self,
@@ -267,7 +267,7 @@ class APIRequest:
             logger.debug(
                 f"session的请求头是：{getattr(session, 'headers', '没有headers')}")
             logger.debug(getattr(session, 'post', '没有post！'))
-            if getattr(session, 'post', '没有post！') == '没有post！':
+            if getattr(session, 'post', 'null') == 'null':
                 logger.debug(f'session的dir：f{dir(session)}')
 
             if session is not None:
