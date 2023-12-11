@@ -3,3 +3,4 @@ env
 __pycache__
 api keys.txt
 myapp*.log
+pg.py
