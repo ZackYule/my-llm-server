@@ -1,6 +1,8 @@
 .DS_Store
 env
+venv
 __pycache__
 api keys.txt
 myapp*.log
 pg.py
+._api keys.txt
