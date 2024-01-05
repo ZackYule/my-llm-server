@@ -37,3 +37,10 @@ async def chat_completions(request: ChatRequest,
 async def chat_completions_v1(request: ChatRequest,
                               authorization: str = Depends(verify_token)):
     return await process_chat_completion(request)
+
+
+@router.post("/v1/completions")
+async def chat_completions_v1(request: ChatRequest,
+                              authorization: str = Depends(verify_token)):
+    logger.info('🚀' * 10)
+    return await process_chat_completion(request)
