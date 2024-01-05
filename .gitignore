@@ -6,3 +6,4 @@ api keys.txt
 myapp*.log
 pg.py
 ._api keys.txt
+nohup.out
